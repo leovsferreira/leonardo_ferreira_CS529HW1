@@ -38,7 +38,18 @@ export default function Whitehat(props){
             const stateData = props.data.states;
 
             //EDIT THIS TO CHANGE WHAT IS USED TO ENCODE COLOR
-            const getEncodedFeature = d => d.count
+            const getEncodedFeature = (d) => {
+                const count = d.count;
+                const population = Number(d.population);
+                
+                return (count / population) * 100000;
+            }
+            
+            const getEncodedCountFeature = (d) => {
+                const count = d.count;
+                
+                return count;
+            }
 
             //this section of code sets up the colormap
             const stateCounts = Object.values(stateData).map(getEncodedFeature);
@@ -66,6 +77,15 @@ export default function Whitehat(props){
                     return 0
                 }
                 return getEncodedFeature(entry[0]);
+            }
+            function getActualCount(name){
+                //map uses full name, dataset uses abreviations
+                name = cleanString(name);
+                let entry = stateData.filter(d=>d.state===name);
+                if(entry === undefined | entry.length < 1){
+                    return 0
+                }
+                return getEncodedCountFeature(entry[0]);
             }
             function getStateVal(name){
                 let count = getCount(name);
@@ -99,9 +119,10 @@ export default function Whitehat(props){
                         props.setBrushedState(state);
                     }
                     let sname = d.properties.NAME;
-                    let count = getCount(sname);
+                    let perHab = getCount(sname).toFixed(2);
+                    let count = getActualCount(sname);
                     let text = sname + '</br>'
-                        + 'Gun Deaths: ' + count;
+                        + 'Gun Deaths: ' + count + '<br>Per 100k: ' + perHab;
                     tTip.html(text);
                 }).on('mousemove',(e)=>{
                     //see app.js for the helper function that makes this easier
