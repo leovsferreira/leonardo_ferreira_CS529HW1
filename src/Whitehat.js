@@ -152,7 +152,16 @@ export default function Whitehat(props){
                 .attr('cx',d=> projection([d.lng,d.lat])[0])
                 .attr('cy',d=> projection([d.lng,d.lat])[1])
                 .attr('r',d=>cityScale(d.count))
-                .attr('opacity',.5);                
+                .attr('opacity',.5)
+                .on('mouseover',(e,d)=>{
+                    console.log(d)
+                    const name = d.city + " - " + d.state;
+                    const count = Number(d.count) || 0;
+                    props.ToolTip.moveTTipEvent(tTip,e);
+                    tTip.html(`${name}</br>Gun Deaths: ${count}`);
+                })
+                .on('mousemove',(e)=> props.ToolTip.moveTTipEvent(tTip,e))
+                .on('mouseout',()=> props.ToolTip.hideTTip(tTip));                
 
             
             //draw a color legend, automatically scaled based on data extents
