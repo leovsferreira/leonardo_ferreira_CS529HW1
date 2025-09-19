@@ -62,11 +62,11 @@ export default function Whitehat(props){
             //so red is bad (p.s. this is not a good color scheme still)
             const stateScale = d3.scaleLinear()
                 .domain([stateMin,stateMax])
-                .range([1,0]);
+                .range([0,1]);
 
             //TODO: EDIT HERE TO CHANGE THE COLOR SCHEME
             //this function takes a number 0-1 and returns a color
-            const colorMap = d3.interpolateRdYlGn;
+            const colorMap = d3.interpolateBlues;
 
             //this set of functions extracts the features given the state name from the geojson
             function getCount(name){
@@ -197,7 +197,7 @@ export default function Whitehat(props){
                 const legendTitle = {
                     'x': legendX - barWidth,
                     'y': bounds.y,
-                    'text': 'Gun Deaths' 
+                    'text': 'Gun Deaths per 100k' 
                 }
                 svg.selectAll('.legendText')
                     .data([legendTitle].concat(colorLData)).enter()
