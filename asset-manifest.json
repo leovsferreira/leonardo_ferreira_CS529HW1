@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/leonardo_ferreira_CS529HW1/static/css/main.3ab758dc.css",
+    "main.js": "/leonardo_ferreira_CS529HW1/static/js/main.74d3cc05.js",
+    "static/js/787.4ef9572b.chunk.js": "/leonardo_ferreira_CS529HW1/static/js/787.4ef9572b.chunk.js",
+    "index.html": "/leonardo_ferreira_CS529HW1/index.html",
+    "main.3ab758dc.css.map": "/leonardo_ferreira_CS529HW1/static/css/main.3ab758dc.css.map",
+    "main.74d3cc05.js.map": "/leonardo_ferreira_CS529HW1/static/js/main.74d3cc05.js.map",
+    "787.4ef9572b.chunk.js.map": "/leonardo_ferreira_CS529HW1/static/js/787.4ef9572b.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.3ab758dc.css",
+    "static/js/main.74d3cc05.js"
+  ]
+}
