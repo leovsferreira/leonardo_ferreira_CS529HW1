@@ -137,9 +137,10 @@ export default function Whitehat(props){
             //draw markers for each city
             const cityData = props.data.cities
             const cityMax = d3.max(cityData.map(d=>d.count));
-            const cityScale = d3.scaleLinear()
-                .domain([0,cityMax])
-                .range([0,maxRadius]);
+            const maxArea = Math.PI * Math.pow(maxRadius, 2);
+            const cityArea = d3.scaleLinear()
+                                .domain([0, cityMax])
+                                .range([0, maxArea]);
 
             mapGroup.selectAll('.city').remove();
 
@@ -151,12 +152,14 @@ export default function Whitehat(props){
                 .attr('id',d=>d.key)
                 .attr('cx',d=> projection([d.lng,d.lat])[0])
                 .attr('cy',d=> projection([d.lng,d.lat])[1])
-                .attr('r',d=>cityScale(d.count))
+                .attr('r',d=>{
+                    const a = cityArea(d.count);
+                    return Math.sqrt(a / Math.PI);
+                })
                 .attr('opacity',.5)
                 .on('mouseover',(e,d)=>{
-                    console.log(d)
                     const name = d.city + " - " + d.state;
-                    const count = Number(d.count) || 0;
+                    const count = d.count;
                     props.ToolTip.moveTTipEvent(tTip,e);
                     tTip.html(`${name}</br>Gun Deaths: ${count}`);
                 })
